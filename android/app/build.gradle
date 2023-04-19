@@ -99,9 +99,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.pfs_mobile"
+    namespace "com.football"
     defaultConfig {
-        applicationId "com.pfs_mobile"
+        applicationId "com.football"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
