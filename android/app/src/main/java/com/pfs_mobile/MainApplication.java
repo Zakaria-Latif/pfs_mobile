@@ -1,4 +1,4 @@
-package com.pfs_mobile;
+package com.football;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeNavigation from '../screens/Home/HomeNavigation';
 import CalendarScreen from '../screens/CalendarScreen';
 import MessagingScreen from '../screens/MessagingScreen';
 import NotificationScreen from '../screens/NotificationScreen';
@@ -27,7 +27,7 @@ const AppNavigation = () => {
           tabBarIcon: ({focused, color, size}) => {
             let iconName;
             let rn = route.name;
-
+            
             if (rn === homeName) {
               iconName = focused ? 'home' : 'home-outline';
             } else if (rn === calendarName) {
@@ -64,7 +64,7 @@ const AppNavigation = () => {
           tabBarInactiveTintColor: '#999',
           // headerShown: false,
         })}>
-        <Tab.Screen name={homeName} component={HomeScreen} />
+        <Tab.Screen name={homeName} component={HomeNavigation} />
         <Tab.Screen name={calendarName} component={CalendarScreen} />
         <Tab.Screen name={messagingName} component={MessagingScreen} />
         <Tab.Screen name={notificationName} component={NotificationScreen} />

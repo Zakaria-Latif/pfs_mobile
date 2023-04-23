@@ -4,4 +4,6 @@ module.exports = {
   bracketSpacing: false,
   singleQuote: true,
   trailingComma: 'all',
+  // Disable error highlighting and warnings
+  vscodeIntegration: false,
 };
