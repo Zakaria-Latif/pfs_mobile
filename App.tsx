@@ -65,11 +65,15 @@ const client = new ApolloClient({
   link: from([errorLink, httpLink]),
 });
 
+import {AuthProvider } from "./src/context/AuthContext"
+
 function App(): JSX.Element {
   return (
-    <ApolloProvider client={client}>
-      <AppNavigation />
-    </ApolloProvider>
+    <AuthProvider>
+      <ApolloProvider client={client}>
+        <AppNavigation />
+      </ApolloProvider>
+    </AuthProvider>
   );
 }
 
