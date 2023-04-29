@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,6 +25,7 @@ import {
 import {onError} from '@apollo/client/link/error';
 
 import AppNavigation from './src/navigation/AppNavigation';
+import {AuthProvider} from './src/context/AuthContext';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors)
@@ -56,7 +58,7 @@ const cache = new InMemoryCache({
 
 const httpLink = new HttpLink({
   uri: `http://${
-    Platform.OS === 'ios' ? 'localhost' : '192.168.1.5'
+    Platform.OS === 'ios' ? 'localhost' : '192.168.1.3'
   }:3000/graphql`,
 });
 
@@ -65,15 +67,13 @@ const client = new ApolloClient({
   link: from([errorLink, httpLink]),
 });
 
-import {AuthProvider } from "./src/context/AuthContext"
-
 function App(): JSX.Element {
   return (
-    <AuthProvider>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <AuthProvider>
         <AppNavigation />
-      </ApolloProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ApolloProvider>
   );
 }
 
