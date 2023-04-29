@@ -35,15 +35,15 @@ const PlayerTab = () => {
         <View style={styles.pageContainer}>
           {data.players.map(player => (
             <View style={styles.card} key={player.id}>
-              <Image
+              {/* <Image
                 source={{uri: player.image}}
                 style={styles.profilePicture}
-              />
+              /> */}
               <View style={styles.info}>
                 <Text style={styles.name}>{player.username}</Text>
                 <View style={styles.details}>
                   <Text style={styles.position}>{player.position}</Text>
-                  <Text style={styles.email}>{player.rate}</Text>
+                  <Text style={styles.fullName}>{player.rate}</Text>
                 </View>
               </View>
             </View>

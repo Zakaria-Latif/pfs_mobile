@@ -6,14 +6,13 @@ const GET_PLAYERS = gql`
       id
       username
       password
-      email
+      fullName
       location
       isVerified
       verificationToken
       resetToken
       resetExpiration
       description
-      playerStatisticsId
       createdAt
       updatedAt
     }
