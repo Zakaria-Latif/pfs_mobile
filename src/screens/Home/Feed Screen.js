@@ -18,20 +18,22 @@ const FeedScreen = props => {
     <View style={styles.root}>
           <View style={styles.pageContainer}>
             <View style={styles.topNavigation}>
-              <Pressable onPress={() => setActiveScreen('MATCH')}>
+              <Pressable style={styles.button} onPress={() => setActiveScreen('MATCH')}>
                 <Ionicons
                   name={activeScreen === 'MATCH' ? "football" : "football-outline"}
-                  size={30}
+                  size={25}
                   color={activeScreen === 'MATCH' ? activeColor : color}
                 />
+                <Text style={{...styles.buttonText, color: activeScreen === 'MATCH' ? activeColor : color,}}>Match</Text>
               </Pressable>
 
-              <Pressable onPress={() => setActiveScreen('PLAYER')}>
+              <Pressable style={styles.button} onPress={() => setActiveScreen('PLAYER')}>
                 <MaterialCommunityIcons
                   name={activeScreen === 'PLAYER' ? "star-four-points"  : "star-four-points-outline"}
-                  size={30}
+                  size={25}
                   color={activeScreen === 'PLAYER' ? activeColor : color}
-                />
+                  />
+                  <Text style={{...styles.buttonText, color: activeScreen === 'PLAYER' ? activeColor : color,}}>Player</Text>
               </Pressable>
             </View>
 
@@ -75,6 +77,15 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     backgroundColor: '#f7f7f7',
+  },
+  button: {
+    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    columnGap: 5,
+  },
+  buttonText: {
+    fontWeight: 'bold',
   },
 });
 
