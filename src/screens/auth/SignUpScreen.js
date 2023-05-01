@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -21,10 +21,18 @@ import FacebookSVG from '../../assets/images/icons/facebook.svg';
 import TwitterSVG from '../../assets/images/icons/twitter.svg';
 import CustomButton from '../../components/CustomButton';
 
+import {AuthContext} from "../../context/AuthContext"
+
 export const SignUpScreen = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Date of Birth');
+
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const {signup} = useContext(AuthContext)
 
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
@@ -104,6 +112,8 @@ export const SignUpScreen = ({navigation}) => {
               style={{marginRight: 5}}
             />
           }
+          value={username}
+          onChangeText={text => setUsername(text)}
         />
 
         <InputField
@@ -117,6 +127,8 @@ export const SignUpScreen = ({navigation}) => {
             />
           }
           keyboardType="email-address"
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
 
         <InputField
@@ -130,6 +142,8 @@ export const SignUpScreen = ({navigation}) => {
             />
           }
           inputType="password"
+          value={password}
+          onChangeText={text => setPassword(text)}
         />
 
         <InputField
@@ -143,6 +157,8 @@ export const SignUpScreen = ({navigation}) => {
             />
           }
           inputType="password"
+          value={confirmPassword}
+          onChangeText={text => setConfirmPassword(text)}
         />
 
         {/* <View
@@ -183,7 +199,7 @@ export const SignUpScreen = ({navigation}) => {
           }}
         /> */}
 
-        <CustomButton label={'Register'} onPress={() => {navigation.goBack()}} />
+        <CustomButton label={'Register'} onPress={() => {signup(email, username, password )}} />
 
         <View
           style={{

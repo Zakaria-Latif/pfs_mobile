@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
+  ScrollView,
   StatusBar,
   Text,
   StyleSheet,
@@ -19,7 +20,7 @@ const PlayerTab = () => {
     //   console.warn('Player', data);
     // },
     variables: {
-      paginationInput: {skip: 0, take: 6},
+      paginationInput: {skip: 0, take: 10},
     },
   });
 
@@ -35,79 +36,19 @@ const PlayerTab = () => {
         <View style={styles.pageContainer}>
           {data.players.map(player => (
             <View style={styles.card} key={player.id}>
-              {/* <Image
+              {player.image ?  (<Image
                 source={{uri: player.image}}
                 style={styles.profilePicture}
-              /> */}
+              />):  null }
               <View style={styles.info}>
                 <Text style={styles.name}>{player.username}</Text>
                 <View style={styles.details}>
-                  <Text style={styles.position}>{player.position}</Text>
-                  <Text style={styles.fullName}>{player.rate}</Text>
+                  <Text style={styles.position}>{player.playerStatistics.position} </Text>
+                  <Text style={styles.fullName}>{player.playerStatistics.rate}</Text>
                 </View>
               </View>
             </View>
           ))}
-          <View style={styles.card}>
-            <Image
-              source={{
-                uri: 'https://picsum.photos/id/1/200/300',
-              }}
-              style={styles.profilePicture}
-            />
-            <View style={styles.info}>
-              <Text style={styles.name}>Name</Text>
-              <View style={styles.details}>
-                <Text style={styles.position}>Position: </Text>
-                <Text style={styles.rate}>56</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.card}>
-            <Image
-              source={{
-                uri: 'https://picsum.photos/id/1/200/300',
-              }}
-              style={styles.profilePicture}
-            />
-            <View style={styles.info}>
-              <Text style={styles.name}>Name</Text>
-              <View style={styles.details}>
-                <Text style={styles.position}>Position: </Text>
-                <Text style={styles.rate}>56</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.card}>
-            <Image
-              source={{
-                uri: 'https://picsum.photos/id/1/200/300',
-              }}
-              style={styles.profilePicture}
-            />
-            <View style={styles.info}>
-              <Text style={styles.name}>Name</Text>
-              <View style={styles.details}>
-                <Text style={styles.position}>Position: </Text>
-                <Text style={styles.rate}>56</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.card}>
-            <Image
-              source={{
-                uri: 'https://picsum.photos/id/1/200/300',
-              }}
-              style={styles.profilePicture}
-            />
-            <View style={styles.info}>
-              <Text style={styles.name}>Name</Text>
-              <View style={styles.details}>
-                <Text style={styles.position}>Position: </Text>
-                <Text style={styles.rate}>56</Text>
-              </View>
-            </View>
-          </View>
         </View>
       )}
     </>
@@ -143,7 +84,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   name: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#000',
   },

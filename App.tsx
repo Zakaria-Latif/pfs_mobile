@@ -69,11 +69,11 @@ import {AuthProvider } from "./src/context/AuthContext"
 
 function App(): JSX.Element {
   return (
-    <AuthProvider>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <AuthProvider>
         <AppNavigation />
-      </ApolloProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ApolloProvider>
   );
 }
 

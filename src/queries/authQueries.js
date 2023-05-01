@@ -1,9 +1,11 @@
-import {gql} from '@apollo/client';
+import {gql,  useQuery} from '@apollo/client';
 
 const LOG_IN = gql`
 query login($loginInput: LoginInput!) {
   login (loginInput: $loginInput) {
-    token
+    accessToken
   }
 }
 `;
+
+export {LOG_IN};
