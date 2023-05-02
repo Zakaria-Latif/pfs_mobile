@@ -9,7 +9,8 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  Pressable
+  Pressable,
+  Slider
 } from 'react-native';
 import {useQuery, useMutation} from '@apollo/client';
 import {GET_PLAYERS} from '../../../queries/playerQueries';
@@ -19,6 +20,20 @@ import Error from '../../../components/Error';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PlayerTab = () => {
+  const [search, setSearch] = useState('');
+  const [showFilter, setShowFilter] = useState(false)
+  const [position, setPosition] = useState(null)
+  const [sliderValue, setSliderValue] = useState(0);
+
+  const handleSliderChange = (value) => {
+    setSliderValue(Math.floor(value));
+  }
+
+  const handleSearch = () => {
+    console.log('Search', search);
+    console.log('position', position)
+    console.log('Slider',sliderValue)
+  }
   const {loading, error, data} = useQuery(GET_PLAYERS, {
     // onCompleted: data => {
     //   console.warn('Player', data);
@@ -33,10 +48,6 @@ const PlayerTab = () => {
     console.warn('Error', error);
     return <Error />;
   }
-
-  const [search, setSearch] = useState('');
-  const [showFilter, setShowFilter] = useState(false)
-  const [position, setPosition] = useState(null)
   return (
     <>
       {!loading && !error && (
@@ -47,7 +58,7 @@ const PlayerTab = () => {
               placeholder="Search a Player"
               style={styles.searchInput}
               value={search}
-              // onSubmitEditing={handleSearch}
+              onSubmitEditing={handleSearch}
               returnKeyType="search"
               onChangeText={(text)=> setSearch(text)}
               />
@@ -73,6 +84,19 @@ const PlayerTab = () => {
               <Pressable style={{ ...styles.positionFilterButton, backgroundColor: position=== 'GK'  ? '#999' : "#ddd"}} onPress={() => {position=== 'GK' ? setPosition(null): setPosition("GK")}}>
                   <Text style={styles.positionFilterButtonLabel}>GK</Text>
               </Pressable>
+            </View>
+            <View style={styles.positionFilter}>
+              <Text style={styles.positionFilterLabel}>Min Rate: ({sliderValue})</Text>
+                <Slider
+                  style={styles.slider}
+                  minimumValue={0}
+                  maximumValue={100}
+                  value={sliderValue}
+                  minimumTrackTintColor="#222" 
+                  maximumTrackTintColor="#999" 
+                  thumbTintColor="#222"
+                  onValueChange={handleSliderChange}
+                />
             </View>
           </View>
         )
@@ -202,7 +226,11 @@ const styles = StyleSheet.create({
   positionFilterLabel: {
     color: "#222",
     marginTop: 2,
-  }
+  },
+  slider: {
+    marginTop: 5,
+    flex: 1,
+  },
 });
 
 export default PlayerTab;
