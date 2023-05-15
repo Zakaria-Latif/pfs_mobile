@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import HomeNavigation from '../screens/Home/HomeNavigation';
 import CalendarScreen from '../screens/CalendarScreen';
-import MessagingScreen from '../screens/MessagingScreen';
+import MessagingNavigation from '../screens/Messaging/MessagingNavigation';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -64,7 +64,7 @@ const AppStack = () => {
         })}>
         <Tab.Screen name={homeName} component={HomeNavigation} />
         <Tab.Screen name={calendarName} component={CalendarScreen} />
-        <Tab.Screen name={messagingName} component={MessagingScreen} />
+        <Tab.Screen name={messagingName} component={MessagingNavigation} />
         <Tab.Screen name={notificationName} component={NotificationScreen} />
         <Tab.Screen name={profileName} component={ProfileScreen} />
       </Tab.Navigator>
