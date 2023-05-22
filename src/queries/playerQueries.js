@@ -2,11 +2,12 @@ import {gql} from '@apollo/client';
 
 const GET_PLAYERS = gql`
   query players($paginationInput: PaginationGroupInput!) {
-    players (paginationInput: $paginationInput) {
-      id,
-      username,
-      image,
-      playerStatistics{
+    players(paginationInput: $paginationInput) {
+      id
+      username
+      image
+      email
+      playerStatistics {
         rate
         position
       }
@@ -15,17 +16,30 @@ const GET_PLAYERS = gql`
 `;
 
 const GET_PLAYER = gql`
-  query getPlayer($id: ID!) {
+  query getPlayer($id: Int!) {
     player(id: $id) {
       id
-      username,
-      image,
-      playerStatistics{
+      username
+      email
+      image
+      playerStatistics {
         rate
         position
+        matchesNumber
       }
     }
   }
 `;
 
-export {GET_PLAYERS, GET_PLAYER};
+const UPDATE_PLAYER = gql`
+  mutation updatePlayer($updatePlayerInput: UpdatePlayerInput!) {
+    updatePlayer(updatePlayerInput: $updatePlayerInput) {
+      id
+      username
+      email
+      image
+    }
+  }
+`;
+
+export {GET_PLAYERS, GET_PLAYER, UPDATE_PLAYER};
