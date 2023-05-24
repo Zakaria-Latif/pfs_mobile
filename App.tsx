@@ -58,7 +58,7 @@ const cache = new InMemoryCache({
 
 const httpLink = new HttpLink({
   uri: `http://${
-    Platform.OS === 'ios' ? 'localhost' : '192.168.1.13'
+    Platform.OS === 'ios' ? 'localhost' : '192.168.1.5'
   }:3000/graphql`,
 });
 
