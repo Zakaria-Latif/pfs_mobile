@@ -26,6 +26,7 @@ import {onError} from '@apollo/client/link/error';
 
 import AppNavigation from './src/navigation/AppNavigation';
 import {AuthProvider} from './src/context/AuthContext';
+import {authLink} from './src/context/AuthLink';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors)
@@ -58,13 +59,13 @@ const cache = new InMemoryCache({
 
 const httpLink = new HttpLink({
   uri: `http://${
-    Platform.OS === 'ios' ? 'localhost' : '192.168.1.13'
+    Platform.OS === 'ios' ? 'localhost' : '192.168.1.3'
   }:3000/graphql`,
 });
 
 const client = new ApolloClient({
   cache,
-  link: from([errorLink, httpLink]),
+  link: from([authLink, errorLink, httpLink]),
 });
 
 function App(): JSX.Element {

@@ -1,6 +1,5 @@
 import React, {createContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import {useQuery, useMutation, useLazyQuery} from '@apollo/client';
 import {LOG_IN} from '../queries/authQueries';
 import {SIGN_UP} from '../mutations/AuthMutations';
@@ -16,9 +15,9 @@ export const AuthProvider = ({children}) => {
     useMutation(SIGN_UP);
 
   const login = async (username, password) => {
-    /*setIsLoading(true);
+    setIsLoading(true);
 
-    try {
+    /*try {
       const response = await LOGIN({
         variables: {
           loginInput: {username: username, password: password},
@@ -35,8 +34,12 @@ export const AuthProvider = ({children}) => {
       setIsLoading(false);
       return false;
     }*/
+    AsyncStorage.setItem(
+      'userToken',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
+    );
     setUserToken(
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOjEyLCJpYXQiOjE2ODQ0OTk5MjEsImV4cCI6MTY4NDU4NjMyMX0.VUkrqQj1LdukuYmuUZZ4bvvQw5RmHrc4qwrczrDVYdE',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
     );
     setIsLoading(false);
   };

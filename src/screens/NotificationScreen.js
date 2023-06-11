@@ -17,13 +17,7 @@ import Spinner from '../components/Spinner';
 import Error from '../components/Error';
 
 const NotificationScreen = props => {
-  //Recipient Id To Be Changed With Logged In Player Id
-  const {loading, error, data, refetch} = useQuery(GET_NOTIFICATIONS, {
-    variables: {
-      recipientId: 1,
-    },
-  });
-
+  const {loading, error, data, refetch} = useQuery(GET_NOTIFICATIONS);
   const [markAsRead] = useMutation(MARK_AS_READ);
   const [deleteNotification] = useMutation(DELETE_NOTIFICATION);
 
@@ -134,22 +128,14 @@ const NotificationScreen = props => {
             <TouchableOpacity
               style={[styles.actionButton, {backgroundColor: 'green'}]}
               onPress={() =>
-                handleAction(
-                  'accept',
-                  notification.type,
-                  notification.requestId,
-                )
+                handleAction('accept', notification.type, notification.entityId)
               }>
               <Text style={styles.actionButtonText}>Accept</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.actionButton, {backgroundColor: 'red'}]}
               onPress={() =>
-                handleAction(
-                  'refuse',
-                  notification.type,
-                  notification.requestId,
-                )
+                handleAction('refuse', notification.type, notification.entityId)
               }>
               <Text style={styles.actionButtonText}>Refuse</Text>
             </TouchableOpacity>
@@ -165,22 +151,14 @@ const NotificationScreen = props => {
             <TouchableOpacity
               style={[styles.actionButton, {backgroundColor: 'green'}]}
               onPress={() =>
-                handleAction(
-                  'accept',
-                  notification.type,
-                  notification.invitationId,
-                )
+                handleAction('accept', notification.type, notification.entityId)
               }>
               <Text style={styles.actionButtonText}>Accept</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.actionButton, {backgroundColor: 'red'}]}
               onPress={() =>
-                handleAction(
-                  'refuse',
-                  notification.type,
-                  notification.invitationId,
-                )
+                handleAction('refuse', notification.type, notification.entityId)
               }>
               <Text style={styles.actionButtonText}>Refuse</Text>
             </TouchableOpacity>
@@ -213,7 +191,7 @@ const NotificationScreen = props => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={data.getUnreadNotificationsByRecipient}
+        data={data.getUnreadNotifications}
         renderItem={renderNotification}
         keyExtractor={item => item.id}
       />
