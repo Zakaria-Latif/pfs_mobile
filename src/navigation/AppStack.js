@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeNavigation from '../screens/Home/HomeNavigation';
@@ -10,7 +11,7 @@ import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 const homeName = 'Home';
-const calendarName = 'Calendar';
+const calendarName = 'Add Match';
 const messagingName = 'Messaging';
 const notificationName = 'Notification';
 const profileName = 'profile';
@@ -29,7 +30,8 @@ const AppStack = () => {
             if (rn === homeName) {
               iconName = focused ? 'home' : 'home-outline';
             } else if (rn === calendarName) {
-              iconName = focused ? 'calendar' : 'calendar-outline';
+              iconName = focused ? 'pluscircle' : 'pluscircleo';
+              return <AntDesign name={iconName} size={size} color={color}/>
             } else if (rn === messagingName) {
               iconName = focused
                 ? 'message-processing'
@@ -63,8 +65,8 @@ const AppStack = () => {
           headerShown: false,
         })}>
         <Tab.Screen name={homeName} component={HomeNavigation} />
-        <Tab.Screen name={calendarName} component={CalendarScreen} />
         <Tab.Screen name={messagingName} component={MessagingNavigation} />
+        <Tab.Screen name={calendarName} component={CalendarScreen} />
         <Tab.Screen name={notificationName} component={NotificationScreen} />
         <Tab.Screen name={profileName} component={ProfileScreen} />
       </Tab.Navigator>
