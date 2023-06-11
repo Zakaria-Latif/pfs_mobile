@@ -1,15 +1,14 @@
 import {gql} from '@apollo/client';
 
 export const GET_NOTIFICATIONS = gql`
-  query getUnreadNotificationsByRecipient($recipientId: Int!) {
-    getUnreadNotificationsByRecipient(recipientId: $recipientId) {
+  query getUnreadNotifications {
+    getUnreadNotifications {
       id
       type
       title
       message
       isRead
-      invitationId
-      requestId
+      entityId
     }
   }
 `;
@@ -22,6 +21,7 @@ export const NOTIFICATION_CREATED_SUBSCRIPTION = gql`
       message
       isRead
       type
+      entityId
     }
   }
 `;
