@@ -93,3 +93,23 @@ export const REFUSE_MATCH_INVITATION = gql`
     }
   }
 `;
+
+export const GET_MY_MATCHS = gql`
+query myMatches($paginationInput: PaginationInput!) {
+  myMatches(paginationInput: $paginationInput) {
+    id,
+    name,
+    location,
+    time,
+    duration,
+    creator{
+      username
+    },
+    players{
+      player{
+        username,
+      }
+    }
+    }
+}
+`

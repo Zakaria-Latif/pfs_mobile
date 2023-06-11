@@ -2,7 +2,7 @@ import React, {createContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useQuery, useMutation, useLazyQuery} from '@apollo/client';
 import {LOG_IN} from '../queries/authQueries';
-import {SIGN_UP} from '../mutations/AuthMutations';
+import {SIGN_UP} from '../mutations/authMutations';
 
 export const AuthContext = createContext();
 
