@@ -14,6 +14,14 @@ export const GET_MATCHS = gql`
   }
 `;
 
+export const CREATE_MATCH_REQUEST = gql`
+  mutation CreateRequest($matchId: Int!) {
+    createRequest(matchId: $matchId) {
+      id
+    }
+  }
+`;
+
 export const ACCEPT_MATCH_REQUEST = gql`
   mutation acceptMatchRequest($id: Int!) {
     acceptMatchRequest(id: $id) {
@@ -95,40 +103,48 @@ export const REFUSE_MATCH_INVITATION = gql`
 `;
 
 export const GET_MY_MATCHS = gql`
-query myMatches($paginationInput: PaginationInput!) {
-  myMatches(paginationInput: $paginationInput) {
-    id,
-    name,
-    location,
-    time,
-    duration,
-    creator{
-      username
-    },
-    players{
-      player{
-        username,
+  query myMatches($paginationInput: PaginationGroupInput!) {
+    myMatches(paginationInput: $paginationInput) {
+      id
+      name
+      location
+      time
+      duration
+      creator {
+        username
       }
-    }
-    }
-}
-`
-export const SEARCH_MATCHES = gql`
-    query searchMatches($searchMatchInput: SearchMatchInput){
-      searchMatches(searchMatchInput: $searchMatchInput){
-        id,
-        name,
-        location,
-        time,
-        duration,
-        creator{
+      players {
+        player {
           username
-        },
-        players{
-          player{
-            username,
-          }
         }
       }
     }
-`
+  }
+`;
+export const SEARCH_MATCHES = gql`
+  query searchMatches($searchMatchInput: SearchMatchInput) {
+    searchMatches(searchMatchInput: $searchMatchInput) {
+      id
+      name
+      location
+      time
+      duration
+      creator {
+        username
+      }
+      players {
+        player {
+          username
+        }
+      }
+    }
+  }
+`;
+
+export const CREATE_MATCH_MUTATION = gql`
+  mutation CreateMatch($createMatchInput: CreateMatchInput!) {
+    createMatch(createMatchInput: $createMatchInput) {
+      name
+    }
+  }
+`;

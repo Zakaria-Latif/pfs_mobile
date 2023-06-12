@@ -2,7 +2,7 @@ import React, {createContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useQuery, useMutation, useLazyQuery} from '@apollo/client';
 import {LOG_IN} from '../queries/authQueries';
-import {SIGN_UP} from '../mutations/authMutations';
+import {SIGN_UP} from '../mutations/AuthMutations';
 
 export const AuthContext = createContext();
 
@@ -34,14 +34,14 @@ export const AuthProvider = ({children}) => {
       setIsLoading(false);
       return false;
     }
-    // AsyncStorage.setItem(
-    //   'userToken',
-    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
-    // );
-    // setUserToken(
-    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
-    // );
-    setIsLoading(false);
+    /*AsyncStorage.setItem(
+      'userToken',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
+    );
+    setUserToken(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
+    );
+    setIsLoading(false);*/
   };
 
   const signup = async (email, username, password) => {
