@@ -1,5 +1,15 @@
 import React from 'react';
-import {SafeAreaView, View ,StatusBar, Text,  StyleSheet, FlatList, TouchableOpacity, TextInput, Pressable, } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  StatusBar,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  Pressable,
+} from 'react-native';
 
 import {useQuery} from '@apollo/client';
 import {GET_MY_MATCHS} from '../../queries/matchQueries';
@@ -13,11 +23,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../../components/Spinner';
 import Error from '../../components/Error';
-import {useState} from "react"
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Slider from "@react-native-community/slider"
-import DatePicker from 'react-native-date-picker';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const MyMatchesScreen = props => {
   const {loading, error, data} = useQuery(GET_MY_MATCHS, {
@@ -53,7 +58,9 @@ const MyMatchesScreen = props => {
             <Text style={styles.cardCreator}>Football</Text>
           </View>
           <TouchableOpacity style={styles.buttonMain}>
-            <Text style={styles.buttonText}>View Members ({item.playersNumber})</Text>
+            <Text style={styles.buttonText}>
+              View Members ({item.playersNumber})
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.cardMiddle}>
@@ -99,14 +106,13 @@ const MyMatchesScreen = props => {
     <View style={styles.container}>
       <FlatList
         style={styles.flatListContainer}
-        data={data.matches}
+        data={data.myMatches}
         renderItem={render}
         keyExtractor={item => item.id}
       />
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -115,11 +121,11 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    width: "100%",
+    width: '100%',
     marginTop: 15,
   },
   flatListContainer: {
-      width: '90%',
+    width: '90%',
   },
   card: {
     backgroundColor: '#ddd',
@@ -196,9 +202,9 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   searchInputContainer: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    borderWidth: 1, 
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
     borderRadius: 3,
     height: 40,
     width: '90%',
@@ -207,7 +213,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    padding: 10
+    padding: 10,
   },
   filterContainer: {
     width: '90%',
@@ -215,19 +221,19 @@ const styles = StyleSheet.create({
   positionFilter: {
     flexDirection: 'row',
     height: 40,
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
-  positionFilterButton:{
+  positionFilterButton: {
     padding: 2,
     paddingHorizontal: 6,
-    backgroundColor: '#ddd'
+    backgroundColor: '#ddd',
   },
   positionFilterButtonLabel: {
-    color: "#222"
+    color: '#222',
   },
   positionFilterLabel: {
-    color: "#222",
+    color: '#222',
     marginTop: 2,
   },
   slider: {
@@ -237,5 +243,3 @@ const styles = StyleSheet.create({
 });
 
 export default MyMatchesScreen;
-
-
