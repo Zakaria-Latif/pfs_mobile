@@ -113,3 +113,22 @@ query myMatches($paginationInput: PaginationInput!) {
     }
 }
 `
+export const SEARCH_MATCHES = gql`
+    query searchMatches($searchMatchInput: SearchMatchInput){
+      searchMatches(searchMatchInput: $searchMatchInput){
+        id,
+        name,
+        location,
+        time,
+        duration,
+        creator{
+          username
+        },
+        players{
+          player{
+            username,
+          }
+        }
+      }
+    }
+`

@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, FlatList, TouchableOpacity, TextInput, Pressable, } from 'react-native';
-import {useQuery} from '@apollo/client';
-import {GET_MATCHS} from '../../../queries/matchQueries';
+import { useLazyQuery} from '@apollo/client';
+import {GET_MATCHS, SEARCH_MATCHES} from '../../../queries/matchQueries';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faFutbol,
@@ -16,8 +16,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Slider from "@react-native-community/slider"
 import DatePicker from 'react-native-date-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useEffect} from "react"
+
 
 const MatchTab = () => {
+  const [data, setData] = useState([])
   const [search, setSearch] = useState('');
   const [showFilter, setShowFilter] = useState(false)
   const [position, setPosition] = useState(null)
@@ -31,6 +34,10 @@ const MatchTab = () => {
   
   const [openFrom, setOpenFrom] = useState(false);
   const [openTo, setOpenTo] = useState(false);
+
+  const [GETMATCHS, {loading, error, dataMatch}] = useLazyQuery(GET_MATCHS)
+
+  const [SEARCHMATCHES, {loadingSearch, errorSearch, dataSearch}] = useLazyQuery(SEARCH_MATCHES);
 
   const handleMinSliderChange = (value) => {
     setMinDuration(Math.floor(value/15)*15);
@@ -52,22 +59,53 @@ const MatchTab = () => {
     return time;
   }
 
-  const handleSearch = () => {
-    console.log('Search', search);
-    console.log('Min Duration',minDuration)
-    console.log('Max Duration',maxDuration)
-    console.log('From', dateFrom)
-    console.log('To', dateTo)
+  
+const handleSearch = async () => {
+  console.log('Search', search);
+  console.log('Min Duration', minDuration);
+  console.log('Max Duration', maxDuration);
+  console.log('From', dateFrom);
+  console.log('To', dateTo);
+  try {
+    const response = await SEARCHMATCHES({
+      variables: {
+        searchMatchInput: {
+          minDuration: minDuration,
+          maxDuration: maxDuration,
+          dateFrom: dateFrom,
+          dateTo: dateTo,
+          searchTerm: search,
+        },
+      },
+    });
+    console.log(response.data);
+    setData(response.data);
+  } catch (error) {
+    console.error(error);
   }
+};
 
-  const {loading, error, data} = useQuery(GET_MATCHS, {
-    variables: {
-      paginationInput: {skip: 0, take: 6},
-    },
-  });
+const getMatches = async () => {
+  try {
+    const response = await GETMATCHS({
+      variables: {
+        paginationInput: {skip: 0, take: 6},
+      },
+    })
+    console.log(response.data);
+    setData(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  if (loading) return <Spinner />;
-  if (error) return <Error />;
+  useEffect(()=>{
+    getMatches()
+  }, [])
+
+
+  if (loading || loadingSearch) return <Spinner />;
+  if (error || errorSearch) return <Error />;
 
   const render = ({item}) => {
     const monthDay = item.time.toString().substring(5, 10);
@@ -118,7 +156,7 @@ const MatchTab = () => {
               placeholder="Search a Match"
               style={styles.searchInput}
               value={search}
-              onSubmitEditing={handleSearch}
+              onSubmitEditing={() => handleSearch()}
               returnKeyType="search"
               onChangeText={(text)=> setSearch(text)}
               />
@@ -218,7 +256,7 @@ const MatchTab = () => {
         ) }
       <FlatList
         style={styles.flatListContainer}
-        data={data.matches}
+        data={data?.matches}
         renderItem={render}
         keyExtractor={item => item.id}
       />
