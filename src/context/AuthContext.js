@@ -17,7 +17,7 @@ export const AuthProvider = ({children}) => {
   const login = async (username, password) => {
     setIsLoading(true);
 
-    /*try {
+    try {
       const response = await LOGIN({
         variables: {
           loginInput: {username: username, password: password},
@@ -33,14 +33,14 @@ export const AuthProvider = ({children}) => {
       console.error(error);
       setIsLoading(false);
       return false;
-    }*/
-    AsyncStorage.setItem(
-      'userToken',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
-    );
-    setUserToken(
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
-    );
+    }
+    // AsyncStorage.setItem(
+    //   'userToken',
+    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
+    // );
+    // setUserToken(
+    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikt5cmEiLCJzdWIiOjEsImlhdCI6MTY4NjUxMTAwNywiZXhwIjoxNjg2NTk3NDA3fQ.1KH9Ew_hoCDHCih0ZkFftQVOP7fVqTZqF66CuoVIF9s',
+    // );
     setIsLoading(false);
   };
 
